@@ -128,10 +128,83 @@ const Page = () => {
             <div className='dropdownSelect two'><Select className='select1' styles={customStyles} defaultValue={options1[0]} options={options1} onChange={(option) => setSource(option.value)} /></div>
           </div>
 
-          <table className="table de-table table-rank">
+          {/* Responsive Table */}
+          <div className="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th >Rank</th>
+                  <th ></th>
+                  <th >Collection</th>
+                  <th >Volume</th>
+                  <th >Chg.%</th>
+                  <th >Avg.Sale</th>
+                  <th >Chg.%</th>
+                  <th >Sales</th>
+                  <th >Volume Total</th>
+                </tr>
+              </thead>
+              {loading ?
+                <p>loading...</p>
+                :
+                <tbody>
+                  {collections.map((item, index) =>
+                    <tr key={index}>
+                      <td>#{index + 1}</td>
+                      <td scope="row">
+                        <div className="coll_list_pp">
+                          {item.imagetype?.startsWith('video') ?
+                            <video loop playsinline autoPlay muted controls={false} width={'50px'} height={"50px"}>
+                              <source src={"https://ipfs-cdn.sentx.io/" + item?.imagecid.replace('ipfs://', '')} type="video/mp4" />
+                              Your browser does not support the video tag.
+                            </video>
+                            :
+                            <img className="lazy" src={"https://sentx.io/cdn-cgi/image/width=45,quality=85/https://ipfs-cdn.sentx.io/" + item?.imagecid.replace('ipfs://', '')} alt="" width={'50px'}
+                              style={{ borderRadius: '10px' }} />
+                          }
+                        </div>
+                      </td>
+                      <td>
+                        {item.name}</td>
+                      <td>
+                        <img className="lazy" src="./img/hedera.png" alt="" height="20px" /> {Number(item.volume) ? humanFormat(Number(item.volume)) : ''}
+                      </td>
+                      {
+                        item.volumechg ?
+                          (item.volumechgcolor == 'success' ?
+                            <td className="d-plus">+{item.volumechg}%</td>
+                            :
+                            <td className="d-min">-{item.volumechg}%</td>)
+                          :
+                          <td className="d-plus"></td>
+                      }
+                      <td>
+                        <img className="lazy" src="./img/hedera.png" alt="" height="20px" />{Number(item.avgsale) ? humanFormat(Number(item.avgsale)) : ''}
+                      </td>
+                      {
+                        item.avgsalechg ?
+                          (item.avgsalechgcolor == 'success' ?
+                            <td className="d-plus">+{item.avgsalechg}%</td>
+                            :
+                            <td className="d-min">-{item.avgsalechg}%</td>)
+                          :
+                          <td className="d-plus"></td>
+                      }
+                      <td>{item.sales}</td>
+                      <td>
+                        <img className="lazy" src="./img/hedera.png" alt="" height="20px" /> {Number(item.volumetotal) ? humanFormat(Number(item.volumetotal)) : ''}
+                      </td>
+                    </tr>
+                  )}
+                </tbody>}
+            </table>
+          </div>
+
+          {/* Origin table */}
+          {'yes' == 'no' && <table className="table de-table table-rank">
             <thead>
               <tr>
-                {/* <th scope="col">Rank</th> */}
+                <th scope="col">Rank</th>
                 <th scope="col">Collection</th>
                 <th scope="col">Volume</th>
                 <th scope="col">Chg.%</th>
@@ -148,7 +221,7 @@ const Page = () => {
               <tbody>
                 {collections.map((item, index) =>
                   <tr key={index}>
-                    {/* <td>#{index + 1}</td> */}
+                    <td>#{index + 1}</td>
                     <th scope="row">
                       <div className="coll_list_pp">
                         <img className="lazy" src={"https://sentx.io/cdn-cgi/image/width=200,quality=85/https://ipfs-cdn.sentx.io/" + item?.imagecid.replace('ipfs://', '')} alt="" />
@@ -186,8 +259,10 @@ const Page = () => {
                   </tr>
                 )}
               </tbody>}
+          </table>}
 
-          </table>
+
+
 
           <div className="spacer-double"></div>
 

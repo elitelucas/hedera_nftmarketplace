@@ -1,0 +1,31 @@
+.table-container {
+  overflow-x: auto;
+}
+
+.table-container table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.table-container tr {
+  height: 60px;
+}
+
+.table-container th,
+td {
+  padding: 8px;
+  text-align: left;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .table-container table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  /* .table-container th,
+  td {
+    display: inline-block;
+  } */
+}
