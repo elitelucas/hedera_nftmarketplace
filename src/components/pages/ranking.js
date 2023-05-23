@@ -77,21 +77,22 @@ const options = [
   { value: 9999, label: 'All time' }
 ]
 const options1 = [
-  { value: 'All Markets', label: 'All Markets' },
-  { value: 'Sentient', label: 'Sentient' },
+  { value: 0, label: 'All Markets' },
+  { value: 1, label: 'Sentient' },
 ]
 
 
 const Page = () => {
   const [collections, setCollections] = useState([]);
   const [range, setRange] = useState(24);
+  const [source, setSource] = useState(0); // 0 - all, 1 - sentient
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     (async () => {
       setLoading(true)
       setCollections([])
       try {
-        const { data } = await APIs.post('/nft/getPopularCollection', { range });
+        const { data } = await APIs.post('/nft/getPopularCollection', { range, source });
         if (data.result)
           setCollections(data.data)
         else
@@ -102,7 +103,7 @@ const Page = () => {
         setLoading(false)
       }
     })();
-  }, [range])
+  }, [range, source])
 
   return (<div>
     <GlobalStyles />
@@ -124,7 +125,7 @@ const Page = () => {
 
           <div className="items_filter centerEl">
             <div className='dropdownSelect one'><Select className='select1' styles={customStyles} menuContainerStyle={{ 'zIndex': 999 }} defaultValue={options[2]} options={options} onChange={(option) => setRange(option.value)} /></div>
-            <div className='dropdownSelect two'><Select className='select1' styles={customStyles} defaultValue={options1[0]} options={options1} /></div>
+            <div className='dropdownSelect two'><Select className='select1' styles={customStyles} defaultValue={options1[0]} options={options1} onChange={(option) => setSource(option.value)} /></div>
           </div>
 
           <table className="table de-table table-rank">
@@ -150,12 +151,12 @@ const Page = () => {
                     {/* <td>#{index + 1}</td> */}
                     <th scope="row">
                       <div className="coll_list_pp">
-                        <img className="lazy" src={item.imageAzure} alt="" />
+                        <img className="lazy" src={"https://sentx.io/cdn-cgi/image/width=200,quality=85/https://ipfs-cdn.sentx.io/" + item?.imagecid.replace('ipfs://', '')} alt="" />
                         {/* <i className="fa fa-check"></i> */}
                       </div>
                       {item.name}</th>
                     <td>
-                      <img className="lazy" src="./img/hedera.png" alt="" height="20px" /> {humanFormat(item.volume)}
+                      <img className="lazy" src="./img/hedera.png" alt="" height="20px" /> {Number(item.volume) ? humanFormat(Number(item.volume)) : ''}
                     </td>
                     {
                       item.volumechg ?
@@ -167,7 +168,7 @@ const Page = () => {
                         <td className="d-plus"></td>
                     }
                     <td>
-                      <img className="lazy" src="./img/hedera.png" alt="" height="20px" /> {humanFormat(item.avgsale)}
+                      <img className="lazy" src="./img/hedera.png" alt="" height="20px" />{Number(item.avgsale) ? humanFormat(Number(item.avgsale)) : ''}
                     </td>
                     {
                       item.avgsalechg ?
@@ -180,7 +181,7 @@ const Page = () => {
                     }
                     <td>{item.sales}</td>
                     <td>
-                      <img className="lazy" src="./img/hedera.png" alt="" height="20px" /> {humanFormat(item.volumetotal)}
+                      <img className="lazy" src="./img/hedera.png" alt="" height="20px" /> {Number(item.volumetotal) ? humanFormat(Number(item.volumetotal)) : ''}
                     </td>
                   </tr>
                 )}

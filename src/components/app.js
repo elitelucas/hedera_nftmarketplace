@@ -9,6 +9,7 @@ import Home3 from './pages/home3';
 import Explore from './pages/explore';
 import Explore2 from './pages/explore2';
 import Ranking from './pages/ranking';
+import Collections from './pages/collections';
 import Auction from './pages/Auction';
 import Helpcenter from './pages/helpcenter';
 import Colection from './pages/colection';
@@ -44,7 +45,7 @@ const GlobalStyles = createGlobalStyle`
 `;
 
 export const ScrollTop = ({ children, location }) => {
-  React.useEffect(() => window.scrollTo(0,0), [location])
+  React.useEffect(() => window.scrollTo(0, 0), [location])
   return children
 }
 
@@ -62,13 +63,16 @@ const PosedRouter = ({ children }) => (
   </Location>
 );
 
-const app= () => (
+const app = () => (
   <div className="wraper">
-  <GlobalStyles />
-    <Header/>
-      <PosedRouter>
+    <GlobalStyles />
+    <Header />
+    <PosedRouter>
       <ScrollTop path="/">
-        <Home exact path="/">
+        <Ranking path="/ranking" />
+        <Collections path="/collections" />
+
+        {/* <Home exact path="/">
           <Redirect to="/home" />
         </Home>
         <Home1 path="/home1" />
@@ -76,7 +80,7 @@ const app= () => (
         <Home3 path="/home3" />
         <Explore path="/explore" />
         <Explore2 path="/explore2" />
-        <Ranking path="/ranking" />
+
         <Auction path="/Auction" />
         <Helpcenter path="/helpcenter" />
         <Colection path="/colection" />
@@ -101,11 +105,11 @@ const app= () => (
         <Accordion path="/accordion" />
         <Alerts path="/alerts" />
         <Progressbar path="/progressbar" />
-        <Tabs path="/tabs" />
-        </ScrollTop>
-      </PosedRouter>
+        <Tabs path="/tabs" /> */}
+      </ScrollTop>
+    </PosedRouter>
     <ScrollToTopBtn />
-    
+
   </div>
 );
 export default app;

@@ -12,7 +12,7 @@ setDefaultBreakpoints([
 ]);
 
 const NavLink = props => (
-  <Link 
+  <Link
     {...props}
     getProps={({ isCurrent }) => {
       // the object returned here is passed to the
@@ -26,106 +26,106 @@ const NavLink = props => (
 
 
 
-const Header= function() {
+const Header = function () {
 
-    const [openMenu, setOpenMenu] = React.useState(false);
-    const [openMenu1, setOpenMenu1] = React.useState(false);
-    const [openMenu2, setOpenMenu2] = React.useState(false);
-    const [openMenu3, setOpenMenu3] = React.useState(false);
-    const handleBtnClick = (): void => {
-      setOpenMenu(!openMenu);
-    };
-    const handleBtnClick1 = (): void => {
-      setOpenMenu1(!openMenu1);
-    };
-    const handleBtnClick2 = (): void => {
-      setOpenMenu2(!openMenu2);
-    };
-    const handleBtnClick3 = (): void => {
-      setOpenMenu3(!openMenu3);
-    };
-    const closeMenu = (): void => {
-      setOpenMenu(false);
-    };
-    const closeMenu1 = (): void => {
-      setOpenMenu1(false);
-    };
-    const closeMenu2 = (): void => {
-      setOpenMenu2(false);
-    };
-    const closeMenu3 = (): void => {
-      setOpenMenu3(false);
-    };
-    const ref = useOnclickOutside(() => {
-      closeMenu();
-    });
-    const ref1 = useOnclickOutside(() => {
-      closeMenu1();
-    });
-    const ref2 = useOnclickOutside(() => {
-      closeMenu2();
-    });
-    const ref3 = useOnclickOutside(() => {
-      closeMenu3();
-    });
+  const [openMenu, setOpenMenu] = React.useState(false);
+  const [openMenu1, setOpenMenu1] = React.useState(false);
+  const [openMenu2, setOpenMenu2] = React.useState(false);
+  const [openMenu3, setOpenMenu3] = React.useState(false);
+  const handleBtnClick = (): void => {
+    setOpenMenu(!openMenu);
+  };
+  const handleBtnClick1 = (): void => {
+    setOpenMenu1(!openMenu1);
+  };
+  const handleBtnClick2 = (): void => {
+    setOpenMenu2(!openMenu2);
+  };
+  const handleBtnClick3 = (): void => {
+    setOpenMenu3(!openMenu3);
+  };
+  const closeMenu = (): void => {
+    setOpenMenu(false);
+  };
+  const closeMenu1 = (): void => {
+    setOpenMenu1(false);
+  };
+  const closeMenu2 = (): void => {
+    setOpenMenu2(false);
+  };
+  const closeMenu3 = (): void => {
+    setOpenMenu3(false);
+  };
+  const ref = useOnclickOutside(() => {
+    closeMenu();
+  });
+  const ref1 = useOnclickOutside(() => {
+    closeMenu1();
+  });
+  const ref2 = useOnclickOutside(() => {
+    closeMenu2();
+  });
+  const ref3 = useOnclickOutside(() => {
+    closeMenu3();
+  });
 
-    const [showmenu, btn_icon] = useState(false);
-    useEffect(() => {
+  const [showmenu, btn_icon] = useState(false);
+  useEffect(() => {
     const header = document.getElementById("myHeader");
     const totop = document.getElementById("scroll-to-top");
     const sticky = header.offsetTop;
     const scrollCallBack = window.addEventListener("scroll", () => {
-        btn_icon(false);
-        if (window.pageYOffset > sticky) {
-          header.classList.add("sticky");
-          totop.classList.add("show");
-          
-        } else {
-          header.classList.remove("sticky");
-          totop.classList.remove("show");
-        } if (window.pageYOffset > sticky) {
-          closeMenu();
-        }
-      });
-      return () => {
-        window.removeEventListener("scroll", scrollCallBack);
-      };
-    }, []);
-    return (
+      btn_icon(false);
+      if (window.pageYOffset > sticky) {
+        header.classList.add("sticky");
+        totop.classList.add("show");
+
+      } else {
+        header.classList.remove("sticky");
+        totop.classList.remove("show");
+      } if (window.pageYOffset > sticky) {
+        closeMenu();
+      }
+    });
+    return () => {
+      window.removeEventListener("scroll", scrollCallBack);
+    };
+  }, []);
+  return (
     <header id="myHeader" className='navbar white'>
-     <div className='container'>
-       <div className='row w-100-nav'>
+      <div className='container'>
+        <div className='row w-100-nav'>
           <div className='logo px-0'>
-              <div className='navbar-title navbar-item'>
-                <NavLink to="/">
+            <div className='navbar-title navbar-item'>
+              <NavLink to="/">
                 <img
-                    src="./img/logo.png"
-                    className="img-fluid d-block"
-                    alt="#"
-                  />
-                  <img
-                    src="./img/logo-2.png"
-                    className="img-fluid d-3"
-                    alt="#"
-                  />
-                  <img
-                    src="./img/logo-light.png"
-                    className="img-fluid d-none"
-                    alt="#"
-                  />
-                </NavLink>
-              </div>
+                  src="./img/logo.png"
+                  className="img-fluid d-block"
+                  alt="#"
+                />
+                <img
+                  src="./img/logo-2.png"
+                  className="img-fluid d-3"
+                  alt="#"
+                />
+                <img
+                  src="./img/logo-light.png"
+                  className="img-fluid d-none"
+                  alt="#"
+                />
+              </NavLink>
+            </div>
           </div>
 
           <div className='search'>
             <input id="quick_search" className="xs-hide" name="quick_search" placeholder="search item here..." type="text" />
           </div>
-                    
-              <BreakpointProvider>
-                <Breakpoint l down>
-                  {showmenu && 
-                  <div className='menu'>
-                    <div className='navbar-item'>
+
+          <BreakpointProvider>
+            <Breakpoint l down>
+              {showmenu &&
+                <div className='menu'>
+                  {/* <div className='navbar-item'>
                       <div ref={ref}>
                         <div className="dropdown-custom dropdown-toggle btn" 
                           onClick={handleBtnClick}
@@ -145,30 +145,31 @@ const Header= function() {
                           </div>
                         )}
                       </div>
-                    </div>
-                    <div className='navbar-item'>
-                      <div ref={ref1}>
-                        <div className="dropdown-custom dropdown-toggle btn" 
-                          onClick={handleBtnClick1}
-                          >
-                          Explore
-                        </div>
-                        {openMenu1 && (
-                          <div className='item-dropdown'>
-                            <div className="dropdown" onClick={closeMenu1}>
-                              <NavLink to="/explore" onClick={() => btn_icon(!showmenu)}>Explore</NavLink>
-                              <NavLink to="/explore2" onClick={() => btn_icon(!showmenu)}>Explore 2</NavLink>
-                              <NavLink to="/ranking" onClick={() => btn_icon(!showmenu)}>Ranking</NavLink>
-                              <NavLink to="/colection" onClick={() => btn_icon(!showmenu)}>Collection</NavLink>
+                    </div> */}
+                  <div className='navbar-item'>
+                    <div ref={ref1}>
+                      <div className="dropdown-custom dropdown-toggle btn"
+                        onClick={handleBtnClick1}
+                      >
+                        Explore
+                      </div>
+                      {openMenu1 && (
+                        <div className='item-dropdown'>
+                          <div className="dropdown" onClick={closeMenu1}>
+                            {/* <NavLink to="/explore" onClick={() => btn_icon(!showmenu)}>Explore</NavLink>
+                              <NavLink to="/explore2" onClick={() => btn_icon(!showmenu)}>Explore 2</NavLink> */}
+                            <NavLink to="/ranking" onClick={() => btn_icon(!showmenu)}>Popular Collections</NavLink>
+                            <NavLink to="/collections" onClick={() => btn_icon(!showmenu)}>Explore Collections</NavLink>
+                            {/* <NavLink to="/colection" onClick={() => btn_icon(!showmenu)}>Collection</NavLink>
                               <NavLink to="/ItemDetail" onClick={() => btn_icon(!showmenu)}>Items Details</NavLink>
                               <NavLink to="/Auction" onClick={() => btn_icon(!showmenu)}>Live Auction</NavLink>
-                              <NavLink to="/helpcenter" onClick={() => btn_icon(!showmenu)}>Help Center</NavLink>
-                            </div>
+                              <NavLink to="/helpcenter" onClick={() => btn_icon(!showmenu)}>Help Center</NavLink> */}
                           </div>
-                        )}
-                      </div>
+                        </div>
+                      )}
                     </div>
-                    <div className='navbar-item'>
+                  </div>
+                  {/* <div className='navbar-item'>
                       <div ref={ref2}>
                         <div className="dropdown-custom dropdown-toggle btn" 
                           onClick={handleBtnClick2}
@@ -221,14 +222,14 @@ const Header= function() {
                           </div>
                         )}
                       </div>
-                    </div>
-                  </div>
-                  }
-                </Breakpoint>
+                    </div> */}
+                </div>
+              }
+            </Breakpoint>
 
-                <Breakpoint xl>
-                  <div className='menu'>
-                    <div className='navbar-item'>
+            <Breakpoint xl>
+              <div className='menu'>
+                {/* <div className='navbar-item'>
                         <div ref={ref}>
                           <div className="dropdown-custom dropdown-toggle btn" 
                              onMouseEnter={handleBtnClick} onMouseLeave={closeMenu}>
@@ -249,31 +250,32 @@ const Header= function() {
                           </div>
                           
                         </div>
-                    </div>
-                    <div className='navbar-item'>
-                      <div ref={ref1}>
-                          <div className="dropdown-custom dropdown-toggle btn" 
-                             onMouseEnter={handleBtnClick1} onMouseLeave={closeMenu1}>
-                            Explore
-                            <span className='lines'></span>
-                            {openMenu1 && (
-                            <div className='item-dropdown'>
-                              <div className="dropdown" onClick={closeMenu1}>
-                              <NavLink to="/explore">Explore</NavLink>
-                              <NavLink to="/explore2">Explore 2</NavLink>
-                              <NavLink to="/ranking">Ranking</NavLink>
-                              <NavLink to="/colection">Collection</NavLink>
+                    </div> */}
+                <div className='navbar-item'>
+                  <div ref={ref1}>
+                    <div className="dropdown-custom dropdown-toggle btn"
+                      onMouseEnter={handleBtnClick1} onMouseLeave={closeMenu1}>
+                      Explore
+                      <span className='lines'></span>
+                      {openMenu1 && (
+                        <div className='item-dropdown'>
+                          <div className="dropdown" onClick={closeMenu1}>
+                            {/* <NavLink to="/explore">Explore</NavLink>
+                              <NavLink to="/explore2">Explore 2</NavLink> */}
+                            <NavLink to="/ranking">Popular Collections</NavLink>
+                            <NavLink to="/collections">Explore Collections</NavLink>
+                            {/* <NavLink to="/colection">Collection</NavLink>
                               <NavLink to="/ItemDetail">Items Details</NavLink>
                               <NavLink to="/Auction">Live Auction</NavLink>
-                              <NavLink to="/helpcenter">Help Center</NavLink>
-                              </div>
-                            </div>
-                          )}
+                              <NavLink to="/helpcenter">Help Center</NavLink> */}
                           </div>
-                          
                         </div>
+                      )}
                     </div>
-                    <div className='navbar-item'>
+
+                  </div>
+                </div>
+                {/* <div className='navbar-item'>
                       <div ref={ref2}>
                           <div className="dropdown-custom dropdown-toggle btn" 
                              onMouseEnter={handleBtnClick2} onMouseLeave={closeMenu2}>
@@ -327,16 +329,16 @@ const Header= function() {
                           )}
                           </div>
                         </div>
-                    </div>
-                  </div>
-                </Breakpoint>
-              </BreakpointProvider>
-
-              <div className='mainside'>
-                <NavLink to="/wallet" className="btn-main">Connect Wallet</NavLink>
+                    </div> */}
               </div>
-                  
-      </div>
+            </Breakpoint>
+          </BreakpointProvider>
+
+          <div className='mainside'>
+            <NavLink to="/wallet" className="btn-main">Connect Wallet</NavLink>
+          </div>
+
+        </div>
 
         <button className="nav-icon" onClick={() => btn_icon(!showmenu)}>
           <div className="menu-line white"></div>
@@ -344,8 +346,8 @@ const Header= function() {
           <div className="menu-line2 white"></div>
         </button>
 
-      </div>     
+      </div>
     </header>
-    );
+  );
 }
 export default Header;
