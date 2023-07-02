@@ -155,11 +155,11 @@ const Page = () => {
                         <div className="coll_list_pp">
                           {item.imagetype?.startsWith('video') ?
                             <video loop playsinline autoPlay muted controls={false} width={'50px'} height={"50px"}>
-                              <source src={"https://ipfs-cdn.sentx.io/" + item?.imagecid.replace('ipfs://', '')} type="video/mp4" />
+                              <source src={"https://ipfs-cdn.sentx.io/" + item?.imagecid?.replace('ipfs://', '')} type="video/mp4" />
                               Your browser does not support the video tag.
                             </video>
                             :
-                            <img className="lazy" src={"https://sentx.io/cdn-cgi/image/width=45,quality=85/https://ipfs-cdn.sentx.io/" + item?.imagecid.replace('ipfs://', '')} alt="" width={'50px'}
+                            <img className="lazy" src={"https://sentx.io/cdn-cgi/image/width=45,quality=85/https://ipfs-cdn.sentx.io/" + item?.imagecid?.replace('ipfs://', '')} alt="" width={'50px'}
                               style={{ borderRadius: '10px' }} />
                           }
                         </div>
@@ -224,7 +224,7 @@ const Page = () => {
                     <td>#{index + 1}</td>
                     <th scope="row">
                       <div className="coll_list_pp">
-                        <img className="lazy" src={"https://sentx.io/cdn-cgi/image/width=200,quality=85/https://ipfs-cdn.sentx.io/" + item?.imagecid.replace('ipfs://', '')} alt="" />
+                        <img className="lazy" src={"https://sentx.io/cdn-cgi/image/width=200,quality=85/https://ipfs-cdn.sentx.io/" + item?.imagecid?.replace('ipfs://', '')} alt="" />
                         {/* <i className="fa fa-check"></i> */}
                       </div>
                       {item.name}</th>
